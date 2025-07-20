@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eternal Play - Intro</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .intro-container {
+      width: 80%;
+      max-width: 800px;
+      text-align: center;
+    }
+
+    .text-box {
+      background-color: #111;
+      color: #eee;
+      border: 2px solid #444;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      font-size: 20px;
+      min-height: 120px;
+      transition: all 0.3s ease;
+    }
+
+    #nextBtn {
+      margin-top: 25px;
+      background-color: #5e17eb;
+      color: #fff;
+      border: none;
+      padding: 12px 30px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    #nextBtn:hover {
+      background-color: #4c0dcf;
+    }
+
+    #nextBtn:active {
+      background-color: #21e1e1;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="intro-container">
+    <div class="text-box" id="textBox">
+      <p id="introText">So you chose to PLAY huh!</p>
+    </div>
+    <button id="nextBtn">Continue</button>
+  </div>
+
+  <script>
+    const introLines = [
+      "So you chose to PLAY huh!",
+      "Welcome to the world of Eternal Play..." +
+      "Where the only way to win is to never stop playing."+
+      "Before you move further, here are the Instructions...",
+      "1. On clicking the CONTINUE button you'll be directed to the next page. <br>" +
+      "2. You'll be given 7 options (cards - will be flipped) and you will have to choose one card.<br>"+
+      "3. After clicking on one card, it will flip showing the NAME OF THE GAME.<br>"+
+      "4. Now you're supposed to proceed according to the game.",
+      "⚠️ Warning: Here, every level pulls you deeper, and the pause button? It doesn't exist."+
+      "Lose, and you restart. Win, and you play again. The cycle never ends, and neither will you."+
+      "Your hands move, but you won't still be the one controlling them.",
+      "Ready to dive in?"
+    ];
+
+    let currentLine = 0;
+    const introText = document.getElementById("introText");
+    const nextBtn = document.getElementById("nextBtn");
+
+    nextBtn.addEventListener("click", () => {
+      currentLine++;
+      if (currentLine < introLines.length) {
+        introText.innerHTML = introLines[currentLine];
+      } else {
+        nextBtn.innerText = "START GAME";
+        nextBtn.onclick = () => {
+          window.location.href = "final-03.html"; // Change to your game page or next scene
+        };
+      }
+    });
+  </script>
+
+</body>
+</html>
