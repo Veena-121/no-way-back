@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zoom Cards with Play Button</title>
+
+  <style>
+    body {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 30px;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+
+    .card {
+      width: 150px;
+      height: 190px;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card.active {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+
+    .play-btn {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 14px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-size: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .card.active .play-btn {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 🔹 Card 1 -->
+  <div class="card">
+    <img src="images/ant.jpg" alt="Card 1" />
+    <button class="play-btn"><a href="cyn.html">▶ Play</a></button>
+  </div>
+
+ 
+  <div class="card">
+    <img src="images/bee.jpg" alt="Card 2" />
+    <button class="play-btn">▶ Play</button>
+  </div>
+
+
+  <div class="card">
+    <img src="images/cat.jpg" alt="Card 3" />
+    <button class="play-btn">▶ Play</button>
+  </div>
+
+ 
+  <div class="card">
+    <img src="images/dog.jpg" alt="Card 4" />
+    <button class="play-btn">▶ Play</button>
+  </div>
+
+  <script>
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+      // When a card is clicked
+      card.addEventListener("click", () => {
+        // Remove "active" from all cards first
+        cards.forEach(c => c.classList.remove("active"));
+        // Then add it to the clicked one
+        card.classList.add("active");
+      });
+
+      
+      const playBtn = card.querySelector(".play-btn");
+      playBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); 
+  
+      });
+    });
+  </script>
+
+</body>
+</html>
