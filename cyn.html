@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CYN</title>
+  <style>
+
+    body{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana,sans-serif;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px
+    }
+    h1{
+      font-size: 2.5rem;
+      color: #333;
+  
+    }
+
+    .game-container{
+      background: #fff;
+      border-radius: 16px;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+
+    .numbers{
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      font-weight: bold;
+      color: #2d5be3;
+    }
+
+    .target{
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #d43f00;
+
+    }
+
+    input{
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    
+    button{
+      padding: 10px 50px;
+      margin: 5px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #2d5be3;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    button:hover{
+      background-color: #1a3dbd;
+    }
+
+    .timer{
+      margin: 10px 0;
+      font-weight: bold;
+      color: #444;
+    }
+
+    .result{
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .scoreboard {
+      margin-top: 10px;
+    }
+
+  </style>
+
+</head>
+<body>
+  <h1>🧠 Choose Your Numbers </h1>
+
+  <!--game container startssssss-->
+  <div class="game-container">
+    <div class="target" id="target"></div>
+    <div class="numbers" id="numbers"></div>
+    <input id="expression" placeholder="Enter your expression" />
+    <button onclick="checkExpression()">Check</button>
+    <button onclick="getNumbers()">New Game</button>
+    <div class="result" id="result"></div>
+    <div class="score">
+      <p>✅ Correct Answers: <span id="score">0</span></p>
+    </div>
+  </div>
+  <!--game container is clossed guyssssss-->
+
+  <script>
+    let numbers = [];
+    let target = 24;
+    let score =0;
+
+    function getNumbers(){
+      numbers = [];
+      for(let i=0; i<4; i++){
+        numbers.push(Math.floor(Math.random()*9)+1)
+      }
+
+      target = Math.floor(Math.random()*40)+10;
+
+    
+      document.getElementById("numbers").innerText = numbers.join(",");
+      document.getElementById("expression").value = "";
+      document.getElementById("result").innerText = "";
+      document.getElementById('target').innerText = `🎯 Target: ${target}`;
+    }
+
+    function checkExpression() {
+      const input = document.getElementById("expression").value;
+      const resultDisplay = document.getElementById('result');
+      const result = eval(input);
+
+      const numUsed = input.match(/\d+/g).map(Number).sort((a,b) => a-b);
+      const originalNum = [...numbers].sort((a,b) => a-b);
+      
+      if(result === target && JSON.stringify(numUsed) === JSON.stringify(originalNum)){
+        document.getElementById('result').innerText = '✅ Correct!' ;
+        score++
+        document.getElementById('score').innerText = score;
+      }else{
+        document.getElementById('result').innerText ='❌ Incorrect';
+      }
+
+    }
+
+    window.onload = getNumbers;
+  
+  
+
+  </script>
+</body>
+</html>
